@@ -1,17 +1,17 @@
 #include "std_lib_facilities.h"
 
-constexpr char number = '8';
-constexpr char quit = 'x';
+constexpr char number = '8'; // 8 means it is a number and the value dose not metter
+constexpr char quit = 'x'; // we can not use x as a variable because we used it as exit command
 constexpr char print = ';';   // for question 3 in Drill 6 we can not change ; to = because we already used it with char !!
 constexpr char result = '=';
 //constexpr char let = 'L';
 constexpr char name = 'a';
-const string declkey = "#";
+const string declkey = "#"; // changed the declaration keyword from let to #
 constexpr char sq = 's';
-const string square_root = "sqrt";
-constexpr char power = 'p';
-const string power_s = "pow";
-const string quitkey = "exit";
+const string square_root = "sqrt"; // square root function
+constexpr char power = 'p'; 
+const string power_s = "pow"; // power function
+const string quitkey = "exit"; // we change 
 
 
 double expression();
@@ -185,26 +185,28 @@ double declaration()
 	define_name(var_name, d);
 	return d;
 }
+// function to calculate the square root
 double square()
 {
 	double d = expression(); 
-	if (d<0) error ("number is negative!");
+	if (d<0) error ("number is negative!"); // the number can not br negative and if the number is negative it shows error
 	return sqrt(d);
 
 }
+// function to calculate the power >>>> pow(x,i) is Multiply x with it self i times
 double POWER()
 {
 	Token t1 = ts.get();
-	if (t1.kind != '(') error (" ( expected !");
+	if (t1.kind != '(') error (" ( expected !"); // we get '(' first because we have pow (
 
 	double x = expression(); 
 	Token t = ts.get();
-	if (t.kind != ',') error (" , expected !");
-	double i = narrow_cast<int>(expression());
-	//if (i != number) error (" intger expected in the power!");
+	if (t.kind != ',') error (" , expected !"); //we get comma between the numbers to sapirate them
+	double i = narrow_cast<int>(expression()); // we cast to int because the power should be an ineger
+	
 	
 	Token t2 = ts.get();
-	if (t2.kind != ')') error (" ) expected !");
+	if (t2.kind != ')') error (" ) expected !"); //get ')' as a token to make sure it is the end of the function and we have no more inputs
 	
 	return pow(x,i);
 
@@ -215,7 +217,7 @@ double statement()
 	Token t = ts.get();
 	switch(t.kind)
 	{
-		case '#':
+		case '#': 
 			return declaration();
 		case sq:
 			return square();
@@ -248,10 +250,10 @@ int main()
 try {
 
 	cout << "Welcome to our simple calculator\n - Please enter expressions useing floating-point numbers" << endl;
-	cout << "- You can use the following operators (+, -, *, /, % , sqrt(num), pow(num,num)) followed by ; then press enter\n - you can exit the program by pressing x and you can not use it as variable  \n";
+	cout << "- You can use the following operators (+, -, *, /, % , sqrt(num), pow(num,num)) followed by ; then press enter to print\n - you can exit the program by writeing x or exit and you can not use x as variable  \n";
 	
 	define_name("pi", 3.1415926535);
-	define_name("k", 1000);
+	define_name("k", 1000); //predifind number k = 1000
 
 	calculate();	
 
